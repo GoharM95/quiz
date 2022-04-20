@@ -34,6 +34,8 @@ const App = () => {
     [questions, currQuestionIndex, setQuestions, setIsDisabled]
   );
 
+  // why my questions.length is becoming undefined after currQuestionIndex
+  // updates from 0 to 1 ?
   const isLastQuestion = currQuestionIndex === questions.length - 1;
   console.log("currQuestionIndex", currQuestionIndex);
 
