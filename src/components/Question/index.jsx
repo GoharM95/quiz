@@ -6,10 +6,10 @@ const Question = ({
   question,
   options,
   handleNextQuestionBtnClick,
-  // isLastQuestion,
   checkAndUpdateAnswer,
   isDisabled,
-  showResult,
+  isLastQuestion,
+  toggleNextBtn,
 }) => {
   return (
     <div>
@@ -35,8 +35,7 @@ const Question = ({
         </ul>
       </div>
       <button disabled={isDisabled} onClick={handleNextQuestionBtnClick}>
-        {/* {isLastQuestion ? "finish quiz" : "next"} */}
-        next
+        {toggleNextBtn ? "finish quiz" : "next"}
       </button>
     </div>
   );
