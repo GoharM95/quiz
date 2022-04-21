@@ -11,10 +11,6 @@ const App = () => {
 
   const question = questions[currQuestionIndex];
 
-  // const showResult = () => {
-  //   console.log("result");
-  // };
-
   const handleNextQuestionBtnClick = useCallback(() => {
     setIsDisabled(true);
     const nextIndex = currQuestionIndex + 1;
@@ -22,35 +18,41 @@ const App = () => {
     setCurrQuestionIndex(nextIndex);
   });
 
+  // questionClone is updating, questions not
   const checkAndUpdateAnswer = useCallback(
     (currentAnswer) => {
-      const questionsClone = { ...questions };
+      const questionsClone = [...questions];
       const questionClone = { ...questionsClone[currQuestionIndex] };
       questionClone.chosenAnswer = currentAnswer;
 
+      console.log("questionClone", questionClone);
+
       setQuestions(questionsClone);
       setIsDisabled(false);
+
+      console.log("questions", questions);
     },
     [questions, currQuestionIndex, setQuestions, setIsDisabled]
   );
 
-  const isLastQuestion = currQuestionIndex === questions.length - 1;
-  console.log("currQuestionIndex", currQuestionIndex);
+  const isLastQuestion = currQuestionIndex === questions.length;
+  const toggleNextBtn = currQuestionIndex === questions.length - 1;
 
-  console.log("questions.length", questions.length);
+  // console.log("currQuestionIndex", currQuestionIndex);
+  // console.log("questions.length", questions.length);
 
   return (
     <div>
       {isLastQuestion ? (
-        <Result />
+        <Result questions={questions} />
       ) : (
         <Question
           {...question}
           handleNextQuestionBtnClick={handleNextQuestionBtnClick}
-          isLastQuestion={isLastQuestion}
           checkAndUpdateAnswer={checkAndUpdateAnswer}
           isDisabled={isDisabled}
-          // showResult={showResult}
+          isLastQuestion={isLastQuestion}
+          toggleNextBtn={toggleNextBtn}
         />
       )}
     </div>
